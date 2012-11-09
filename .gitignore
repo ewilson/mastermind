@@ -1,0 +1,4 @@
+.settings
+*.jar
+classes
+bin
