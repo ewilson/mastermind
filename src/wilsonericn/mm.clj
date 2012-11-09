@@ -2,6 +2,14 @@
 
 (def pegs #{:red :orange :yellow :green :blue :violet})
 
+(defn choose-peg []
+  (rand-nth (vec pegs)))
+
+(defn choose-secret []
+  (repeatedly 4 choose-peg))
+
+(def secret (choose-secret))
+
 (defn exact-matches [guess actual]
   (count (filter true? (map = guess actual))))
 
@@ -15,3 +23,7 @@
   (let [exact (exact-matches guess actual)
         unordered (unordered-matches guess actual)]
     {:black exact :white (- unordered exact)}))
+
+(defn submit [guess]
+  {:guess guess :clue (evaluate guess secret)})
+
