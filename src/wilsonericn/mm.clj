@@ -24,6 +24,12 @@
         unordered (unordered-matches guess actual)]
     {:black exact :white (- unordered exact)}))
 
+(defn to-vector [result]
+  (let [blacks (:black result)
+        whites (:white result)
+        opens (- 4 (+ blacks whites))]
+  (concat (repeat blacks :black) (repeat whites :white) (repeat opens :open))))
+
 (defn submit [guess]
-  {:guess guess :clue (evaluate guess secret)})
+  {:guess guess :clue (to-vector (evaluate guess secret))})
 

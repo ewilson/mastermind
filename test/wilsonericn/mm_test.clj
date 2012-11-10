@@ -30,4 +30,8 @@
   (is (= {:black 3 :white 0} (evaluate [:red :red :blue :green] [:red :red :green :green])))
   (is (= {:black 4 :white 0} (evaluate [:red :red :blue :green] [:red :red :blue :green]))))
 
-
+(deftest converts-result-to-vector 
+  (is (= [:open :open :open :open] (to-vector {:black 0 :white 0})))
+  (is (= [:white :white :open :open] (to-vector {:black 0 :white 2})))
+  (is (= [:black :black :white :open] (to-vector {:black 2 :white 1})))
+  (is (= [:black :black :white :white] (to-vector {:black 2 :white 2}))))
