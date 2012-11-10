@@ -8,8 +8,6 @@
 (defn choose-secret []
   (repeatedly 4 choose-peg))
 
-(def secret (choose-secret))
-
 (defn exact-matches [guess actual]
   (count (filter true? (map = guess actual))))
 
@@ -33,3 +31,10 @@
 (defn submit [guess]
   {:guess guess :clue (to-vector (evaluate guess secret))})
 
+(defn game []
+  {:completed-rows [] :remaining-guesses 12 :secret (choose-secret)})
+
+(def this-game (atom (game)))
+
+(defn reset-game []
+  (reset! this-game (game)))
