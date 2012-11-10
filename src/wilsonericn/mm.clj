@@ -1,4 +1,5 @@
-(ns wilsonericn.mm)
+(ns wilsonericn.mm
+  (:use wilsonericn.cli))
 
 (def pegs #{:red :orange :yellow :green :blue :violet})
 
@@ -7,6 +8,11 @@
 
 (defn choose-secret []
   (repeatedly 4 choose-peg))
+
+(defn game []
+  {:completed-rows [] :round 0 :secret (choose-secret)})
+
+(def this-game (atom (game)))
 
 (defn exact-matches [guess actual]
   (count (filter true? (map = guess actual))))
@@ -29,12 +35,18 @@
   (concat (repeat blacks :black) (repeat whites :white) (repeat opens :open))))
 
 (defn submit [guess]
-  {:guess guess :clue (to-vector (evaluate guess secret))})
-
-(defn game []
-  {:completed-rows [] :remaining-guesses 12 :secret (choose-secret)})
-
-(def this-game (atom (game)))
+  {:guess guess :clue (to-vector (evaluate guess (:secret @this-game)))})
 
 (defn reset-game []
   (reset! this-game (game)))
+
+(defn play []
+  (reset-game)
+  (loop [round 0]
+      (let [guess (read-input (read-line))
+            row (submit guess)]
+    (if (> 4 round)
+        (do (println row))
+      (recur (inc round))
+      "FOO")))
+  
