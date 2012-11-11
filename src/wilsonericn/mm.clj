@@ -9,11 +9,6 @@
 (defn choose-secret []
   (repeatedly 4 choose-peg))
 
-(defn game []
-  {:completed-rows [] :round 0 :secret (choose-secret)})
-
-(def this-game (atom (game)))
-
 (defn exact-matches [guess actual]
   (count (filter true? (map = guess actual))))
 
@@ -26,27 +21,23 @@
 (defn evaluate [guess actual] 
   (let [exact (exact-matches guess actual)
         unordered (unordered-matches guess actual)]
-    {:black exact :white (- unordered exact)}))
-
-(defn to-vector [result]
-  (let [blacks (:black result)
-        whites (:white result)
-        opens (- 4 (+ blacks whites))]
-  (concat (repeat blacks :black) (repeat whites :white) (repeat opens :open))))
-
-(defn submit [guess]
-  {:guess guess :clue (to-vector (evaluate guess (:secret @this-game)))})
-
-(defn reset-game []
-  (reset! this-game (game)))
+    (concat (repeat exact :black) (repeat (- unordered exact) :white))))
 
 (defn play []
-  (reset-game)
-  (loop [round 0]
-      (let [guess (read-input (read-line))
-            row (submit guess)]
-    (if (> 4 round)
-        (do (println row))
-      (recur (inc round))
-      "FOO")))
-  
+  (let [secret (choose-secret)]
+    (loop [count 1
+           rounds []]
+    (if (< 8 count)
+      (do 
+        (println secret)
+        "You lose")
+      (do
+        (println rounds)
+        (println "Input guess")
+        (let [guess (read-input (read-line))
+              round {:guess guess :clue (evaluate guess secret)}]
+          (if (= (:clue round) [:black :black :black :black])
+            "You WIN!"
+            (do 
+              (println round)
+              (recur (inc count) (conj rounds round))))))))))

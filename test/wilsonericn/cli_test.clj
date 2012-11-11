@@ -15,3 +15,7 @@
 (deftest converts-string-with-punct-to-guess-vector 
   (is (= [:red :orange :yellow :green] (read-input "r:o,y;g")))
   (is (= [:blue :violet :red :orange] (read-input "b.v-r|o"))))
+
+(deftest converts-string-with-space-to-guess-vector 
+  (is (= [:red :orange :yellow :green] (read-input "r o y g")))
+  (is (= [:blue :violet :red :orange] (read-input "b\tv\nr o"))))
