@@ -27,12 +27,10 @@
   (let [secret (choose-secret)]
     (loop [count 1
            rounds []]
-      (println rounds)
+      (send-all rounds)
       (cond
         (= (:clue (last rounds)) (repeat 4 :black)) "You WIN!"
         (> count 8) (do (println "The secret is: " secret) "You lose.")
-        :else (do
-                (println "Input next guess")
-                (let [guess (read-input (read-line))
-                      round {:guess guess :clue (evaluate guess secret) :round count}]
-                  (recur (inc count) (conj rounds round))))))))
+        :else (let [guess (request-guess)
+                    round {:guess guess :clue (evaluate guess secret) :round count}]
+                (recur (inc count) (conj rounds round)))))))
