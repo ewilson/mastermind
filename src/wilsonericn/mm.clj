@@ -27,17 +27,18 @@
   (let [secret (choose-secret)]
     (loop [count 1
            rounds []]
-    (if (< 8 count)
-      (do 
-        (println secret)
-        "You lose")
-      (do
-        (println rounds)
-        (println "Input guess")
-        (let [guess (read-input (read-line))
-              round {:guess guess :clue (evaluate guess secret)}]
-          (if (= (:clue round) [:black :black :black :black])
-            "You WIN!"
-            (do 
-              (println round)
-              (recur (inc count) (conj rounds round))))))))))
+      (if (< 8 count)
+        (do 
+          (println secret)
+          "You lose")
+        (do
+          (println rounds)
+          (println "Input guess")
+          (let [guess (read-input (read-line))
+                round {:guess guess :clue (evaluate guess secret) :round count}]
+            (if (= (:clue round) [:black :black :black :black])
+              (do 
+                (println round)
+                (println "You WIN!"))
+              (do 
+                (recur (inc count) (conj rounds round))))))))))
