@@ -3,11 +3,8 @@
 
 (def pegs #{:red :orange :yellow :green :blue :violet})
 
-(defn choose-peg []
-  (rand-nth (vec pegs)))
-
 (defn choose-secret []
-  (repeatedly 4 choose-peg))
+  (repeatedly 4 #(rand-nth (vec pegs))))
 
 (defn exact-matches [guess actual]
   (count (filter true? (map = guess actual))))
