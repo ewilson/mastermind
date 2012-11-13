@@ -16,13 +16,13 @@
 
 (defn losing-message [secret]
   (println "You are out of guesses.")
-  (println "The secret code was: " (apply str (map reverse-code secret))))
+  (printlf "The secret code was: %s" (apply str (map reverse-code secret))))
 
 (defn convert-output [round]
   (let [guess (apply str (map reverse-code (:guess round)))
         clue (apply str (map reverse-clue (:clue round)))
         n (:round round)]
-    (str "-------------------\n(" n ")  |" guess "|  |" clue "|")))
+    (format "-------------------%n(%d)  |%s|  |%-4s|" n guess clue)))
 
 (defn show-board [rounds]
   (doseq [r rounds]
