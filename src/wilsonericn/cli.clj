@@ -1,5 +1,5 @@
 (ns wilsonericn.cli
-  (:use [clojure.set]))
+  (:require [clojure.set :refer [map-invert]]))
 
 (def conversion {\R :red \O :orange \Y :yellow \G :green \B :blue \V :violet})
 
