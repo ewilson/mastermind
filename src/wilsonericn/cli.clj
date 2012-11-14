@@ -16,7 +16,7 @@
 
 (defn losing-message [secret]
   (println "You are out of guesses.")
-  (printlf "The secret code was: %s" (apply str (map reverse-code secret))))
+  (printf "The secret code was: %s" (apply str (map reverse-code secret))))
 
 (defn convert-output [round]
   (let [guess (apply str (map reverse-code (:guess round)))

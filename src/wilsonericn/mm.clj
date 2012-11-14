@@ -2,6 +2,7 @@
   (:use wilsonericn.cli))
 
 (def pegs #{:red :orange :yellow :green :blue :violet})
+(def zero-pegs (zipmap pegs (repeat 0)))
 
 (defn choose-secret []
   (repeatedly 4 #(rand-nth (vec pegs))))
@@ -10,10 +11,9 @@
   (count (filter true? (map = guess actual))))
 
 (defn unordered-matches [guess actual]
-  (let [guess-cts (frequencies guess)
-        actual-cts (frequencies actual)
-        common-keys (filter (set (keys guess-cts)) (keys actual-cts))]
-    (apply + (map (fn [k] (Math/min (k guess-cts) (k actual-cts))) common-keys))))
+  (let [guess-cts (merge zero-pegs (frequencies guess))
+        actual-cts (merge zero-pegs (frequencies actual))]
+    (apply + (vals (merge-with min guess-cts actual-cts)))))
 
 (defn evaluate [guess actual] 
   (let [exact (exact-matches guess actual)
