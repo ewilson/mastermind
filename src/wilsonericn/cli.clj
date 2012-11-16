@@ -1,5 +1,5 @@
 (ns wilsonericn.cli
-  (:require [clojure.set :refer [map-invert]]))
+  (:use [clojure.set :only [map-invert]]))
 
 (def conversion {\R :red \O :orange \Y :yellow \G :green \B :blue \V :violet})
 
@@ -10,8 +10,8 @@
 (defn convert-input [input]
   (map conversion (.toUpperCase (clojure.string/replace input #"\W" ""))))
 
-(defn request-guess []
-  (println "Enter guess")
+(defn request-code []
+  (println "Enter code")
   (convert-input (read-line)))
 
 (defn losing-message [secret]

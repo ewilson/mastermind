@@ -9,4 +9,7 @@
   (fn [code] (= (:clue result) (evaluate code (:guess result)))))
 
 (defn consistent-all [results]
-  (reduce #(filter %2 %1) allcodes (map consistent results)))    
+  (reduce #(filter %2 %1) allcodes (map consistent results))) 
+
+(defn request-comp-guess [rounds]
+  (rand-nth (consistent-all rounds)))
