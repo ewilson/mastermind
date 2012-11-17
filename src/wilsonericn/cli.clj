@@ -1,4 +1,5 @@
 (ns wilsonericn.cli
+  (:require [clojure.string :as str])
   (:use [clojure.set :only [map-invert]]))
 
 (def conversion {\R :red \O :orange \Y :yellow \G :green \B :blue \V :violet})
@@ -8,15 +9,7 @@
 (def reverse-clue {:black \X :white \O})
 
 (defn convert-input [input]
-  (map conversion (.toUpperCase (clojure.string/replace input #"\W" ""))))
-
-(defn request-code []
-  (println "Enter code")
-  (convert-input (read-line)))
-
-(defn losing-message [secret]
-  (println "You are out of guesses.")
-  (printf "The secret code was: %s" (apply str (map reverse-code secret))))
+  (map conversion (str/upper-case (str/replace input #"\W" ""))))
 
 (defn convert-output [round]
   (let [guess (apply str (map reverse-code (:guess round)))
@@ -26,4 +19,20 @@
 
 (defn show-board [rounds]
   (doseq [r rounds]
-    (println (convert-output r))))
+    (println (convert-output r)))
+  rounds)
+
+(defn request-code []
+  (println "Enter code")
+  (convert-input (read-line)))
+
+(defn request-guess [rounds]
+  (show-board rounds)
+  (request-code))
+
+(defn losing-message [rounds secret]
+  (println "You are out of guesses.")
+  (printf "The secret code was: %s" (apply str (map reverse-code secret)))
+  (show-board rounds))
+
+
