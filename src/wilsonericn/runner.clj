@@ -3,5 +3,5 @@
    (:gen-class :main true))
 
 (defn -main []
-    go)
+    (go))
 
