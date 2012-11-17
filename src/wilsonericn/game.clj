@@ -24,3 +24,8 @@
   (let [secrets (take n (map (fn [code] (fn [] code)) allcodes))]
     (for [secret secrets] (play-game secret request-comp-guess identity))))
     
+#_(defn go []
+  (play :encode))
+
+(defn go []
+  (println "hello"))
