@@ -19,3 +19,8 @@
     (= type :encode) (play-game request-code request-comp-guess)
     (= type :decode) (play-game choose-secret request-guess)
     :default "ERROR"))
+
+(defn play-all [n]
+  (let [secrets (take n (map (fn [code] (fn [] code)) allcodes))]
+    (for [secret secrets] (play-game secret request-comp-guess))))
+    
