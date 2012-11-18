@@ -1,8 +1,7 @@
 (ns wilsonericn.game
   (:use wilsonericn.mm
         wilsonericn.cli
-        wilsonericn.solver)
-   (:gen-class :main true))
+        wilsonericn.solver))
 
 (defn play-game [input-secret input-guess output]
   (let [secret (input-secret)]
@@ -24,10 +23,3 @@
 (defn play-all [n]
   (let [secrets (take n (map (fn [code] (fn [] code)) allcodes))]
     (for [secret secrets] (play-game secret request-comp-guess identity))))
-    
-(defn go []
-  (play :encode))
-
-(defn -main [& args]
-    (go))
-
