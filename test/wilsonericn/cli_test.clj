@@ -22,6 +22,10 @@
 
 (deftest displays-round-info
   (is (= 
-"-------------------
-(7)  |RYGB|  |XXO |" 
-(convert-output {:guess [:red :yellow :green :blue], :clue [:black :black :white], :round 7}))))
+"--------------
+|RYGB|  |XXO |" 
+(convert-output {:guess [:red :yellow :green :blue], :clue [:black :black :white]})))
+  (is (= 
+"----------------
+|RYGBB|  |XXO  |" 
+(convert-output {:guess [:red :yellow :green :blue :blue], :clue [:black :black :white]}))))

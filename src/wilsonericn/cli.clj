@@ -13,8 +13,11 @@
 
 (defn convert-output [round]
   (let [guess (apply str (map reverse-code (:guess round)))
-        clue (apply str (map reverse-clue (:clue round)))]
-    (format "--------------%n|%s|  |%-4s|" guess clue)))
+        clue (apply str (map reverse-clue (:clue round)))
+        size (count guess)
+        extra (- size (count clue))]
+    (str (apply str (repeat (+ 6 (* 2 size)) "-")) 
+         "\n|" guess "|  |" clue (apply str (repeat extra " ")) "|")))
 
 (defn show-board [rounds]
   (doseq [r rounds]
