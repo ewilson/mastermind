@@ -20,6 +20,19 @@
     (= type :decode) (play-game choose-secret request-guess show-board)
     :default "ERROR"))
 
-(defn play-all [n]
-  (let [secrets (take n (map (fn [code] (fn [] code)) allcodes))]
-    (for [secret secrets] (play-game secret request-comp-guess identity))))
+(defn record-stats [rounds]
+  (let [num (count rounds)
+        code (:guess (last rounds))]
+    (do (println "code: " code " Number of rounds: " num)
+      num)))
+
+(defn play-all []
+  (let [secrets (map (fn [code] (fn [] code)) allcodes)]
+    (doall (for [secret secrets] (play-game secret request-comp-guess record-stats)))))
+
+;; Add histogram for more readable output
+(defn evaluate-solver []
+  (let [results (frequencies (play-all))]
+    prn results))
+    
+   
