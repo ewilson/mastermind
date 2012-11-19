@@ -4,15 +4,17 @@
   (:gen-class :main true))
 
 (defn -main [& args]
-  (let [[opts args usage]
+  (let [[opts args banner]
         (cli/cli args
           ["-h" "--help" "Show help" :flag true :default false]
-          ["-l" "--limit" "Number of attempts allowed" :default 12] ;; not implemented
-          ["-s" "--size" "Size of code strings" :default 4] ;; not implemented
-          ["-e" "--encode" "Set the encoded string" :flag true :default true])]
+          ["-t" "--test" "Test Mastermind solver" :flag true] 
+          ["-p" "--play" "Play Mastermind" :flag true]
+          ["-v" "--verbose" "Give per-game results" :flag true] 
+          ["-s" "--size" "Size of code strings" :default 4])]
     (when (:help opts)
-      (println usage)
+      (println banner)
       (System/exit 0))
-    (if (:encode opts)
-      (play :encode)
-      (play :decode))))
+    (cond
+      (:test opts) (play :test)
+      (:play opts) (play :play)
+      :default (evaluate-solver))))

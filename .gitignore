@@ -3,3 +3,4 @@
 classes
 bin
 .lein*
+.classpath
