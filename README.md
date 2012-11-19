@@ -1,7 +1,7 @@
 A console implementation of Mastermind
 ======================================
 
-This is a Clojure learning project. I choose the game [Mastermind](http://en.wikipedia.org/wiki/Mastermind_(board_game)) since it is complicated enough to demonstrate the ease in which Clojure handles algorithmic situations, and simple enough for a Clojure n00b to approach comfortably.
+This is a Clojure learning project. I choose the game <a href="http://en.wikipedia.org/wiki/Mastermind_(board_game)">Mastermind</a> since it is complicated enough to demonstrate the ease in which Clojure handles algorithmic situations, and simple enough for a Clojure n00b to approach comfortably.
 
 ### Rule variations
 * I have chosen to remove the concept of losing the game, as it adds little value, and loses information. Think of it like golf, where you keep swinging until you get the ball in the hole.
