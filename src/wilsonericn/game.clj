@@ -4,18 +4,19 @@
         wilsonericn.solver))
 
 (defn play-game [input-secret input-guess output]
-  (let [secret (input-secret)]
+  (let [secret (input-secret)
+        size (count secret)]
     (loop [rounds []]
       (cond
-        (= (:clue (last rounds)) (repeat 4 :black)) (output rounds)
-        :else (let [guess (input-guess rounds)
+        (= (:clue (last rounds)) (repeat size :black)) (output rounds)
+        :else (let [guess (input-guess rounds size)
                     round {:guess guess :clue (evaluate guess secret) :round count}]
                 (recur (conj rounds round)))))))
 
-(defn play [type]
+(defn play [type size]
   (cond 
     (= type :test) (play-game request-code request-comp-guess show-board)
-    (= type :play) (play-game choose-secret request-guess show-board)
+    (= type :play) (play-game (secret-chooser size) request-guess show-board)
     :default "ERROR"))
 
 (defn record-stats [rounds]
@@ -24,9 +25,9 @@
     (do (println "code: " code " Number of rounds: " num)
       num)))
 
-(defn play-all []
+(defn play-all [size]
   (let [secrets (map (fn [code] (fn [] code)) allcodes)]
-    (doall (for [secret secrets] (play-game secret request-comp-guess record-stats)))))
+    (doall (for [secret secrets] (play-game secret request-comp-guess record-stats size)))))
 
 (defn evaluate-solver []
   (println (sort (frequencies (play-all)))))    

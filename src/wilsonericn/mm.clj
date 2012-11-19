@@ -2,8 +2,8 @@
 
 (def pegs #{:red :orange :yellow :green :blue :violet})
 
-(defn choose-secret []
-  (repeatedly 4 #(rand-nth (vec pegs))))
+(defn secret-chooser [size]
+  (fn [] (repeatedly size #(rand-nth (vec pegs)))))
 
 ;; Finds number of correct pegs in correct position
 (defn exact-matches [guess actual]

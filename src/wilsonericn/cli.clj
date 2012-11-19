@@ -28,7 +28,7 @@
   (println "Enter code")
   (convert-input (read-line)))
 
-(defn request-guess [rounds]
+(defn request-guess [rounds _]
   (show-board rounds)
   (request-code))
 

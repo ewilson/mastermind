@@ -10,11 +10,12 @@
           ["-t" "--test" "Test Mastermind solver" :flag true] 
           ["-p" "--play" "Play Mastermind" :flag true]
           ["-v" "--verbose" "Give per-game results" :flag true] 
-          ["-s" "--size" "Size of code strings" :default 4])]
+          ["-s" "--size" "Size of code strings" :default 4 :parse-fn #(Integer. %)])]
     (when (:help opts)
       (println banner)
       (System/exit 0))
-    (cond
-      (:test opts) (play :test)
-      (:play opts) (play :play)
-      :default (evaluate-solver))))
+    (let [s (:size opts)]
+      (cond
+        (:test opts) (play :test s)
+        (:play opts) (play :play s)
+        :default (evaluate-solver s)))))
