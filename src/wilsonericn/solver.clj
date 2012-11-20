@@ -14,4 +14,6 @@
   (reduce #(filter %2 %1) (allcodes size) (map consistent results))) 
 
 (defn request-comp-guess [rounds size]
-  (rand-nth (consistent-all rounds size)))
+  (if (empty? rounds)
+    (take size [:red :red :orange :orange :yellow :yellow :green :green :blue :blue :violet :violet])
+    (first (consistent-all rounds size))))
