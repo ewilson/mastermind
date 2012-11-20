@@ -44,9 +44,9 @@ There are currently three ways of interacting with this game:
 ### Solver algorithm
 I solve the puzzle in _almost_ the simplest way that I know: choosing the 'first' code from the list of all of the possible codes that are still possible, based on the previous results. For example: If the first round is the following:
 
-    ------------
-    RRBB  |O   |
-    ------------
+    --------------
+    |RRBB|  |O   |
+    --------------
 
 then all future guesses must be consistent with this, meaning:
 
