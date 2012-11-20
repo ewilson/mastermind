@@ -26,8 +26,8 @@
       num)))
 
 (defn play-all [size]
-  (let [secrets (map (fn [code] (fn [] code)) allcodes)]
-    (doall (for [secret secrets] (play-game secret request-comp-guess record-stats size)))))
+  (let [secrets (map (fn [code] (fn [] code)) (allcodes size))]
+    (doall (for [secret secrets] (play-game secret request-comp-guess record-stats)))))
 
-(defn evaluate-solver []
-  (println (sort (frequencies (play-all)))))    
+(defn evaluate-solver [size]
+  (println (sort (frequencies (play-all size)))))    

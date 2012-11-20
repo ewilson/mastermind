@@ -58,5 +58,5 @@ then all future guesses must be consistent with this, meaning:
 I have chosen to put the assiging of `X` and `O`s to guesses in the category of 'game mechanics' (namespace `wilsonericn.mm`) rather than as an action performed by a player, since it is entirely determanistic. The only disadvantage of this approach is a lack of transparency when a human is setting the code. This seems more than offset by the convenience of seeing the solver in action without having to evaluate and respond to each guess.
 
 ### To be implemented
-* The ability to vary the number of 'pegs'.
 * Computation of effectiveness and performance metrics
+* Performance is currently unacceptable, particularly as pegs increase. Improvement is planned

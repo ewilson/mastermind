@@ -1,15 +1,17 @@
 (ns wilsonericn.solver
-  (:use wilsonericn.mm))
+  (:use wilsonericn.mm)
+  (:require [clojure.math.combinatorics :as comb]))
 
 (def pegvec (vec pegs))
 
-(def allcodes (for [a pegvec b pegvec c pegvec d pegvec] [a b c d]))
+(defn allcodes [size]
+  (apply comb/cartesian-product (repeat size pegvec)))
 
 (defn consistent [result]
   (fn [code] (= (:clue result) (evaluate code (:guess result)))))
 
-(defn consistent-all [results]
-  (reduce #(filter %2 %1) allcodes (map consistent results))) 
+(defn consistent-all [results size]
+  (reduce #(filter %2 %1) (allcodes size) (map consistent results))) 
 
-(defn request-comp-guess [rounds]
-  (rand-nth (consistent-all rounds)))
+(defn request-comp-guess [rounds size]
+  (rand-nth (consistent-all rounds size)))
