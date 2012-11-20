@@ -36,6 +36,7 @@ Use `-h` flag to see usage information.
 
 ### Scope
 There are currently three ways of interacting with this game:
+
 1. You can play the game (with `-p`) trying to guess the code the program has chosen.
 2. You can test the game solver (with `-t`), setting the code, and watching the program discover the code.
 3. You can run the solver against all possible code to evaluate effectiveness and performance.
@@ -48,6 +49,7 @@ I solve the puzzle in the simplest way that I know: choosing the 'first' code fr
     ------------
 
 then all future guesses must be consistent with this, meaning:
+
 * No guess will contain two reds or two blues
 * No guess will contain both red and blue
 * No guess will contain red in the first or second spot, or blue in the third or fourth spot
