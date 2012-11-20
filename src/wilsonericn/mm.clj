@@ -1,9 +1,9 @@
 (ns wilsonericn.mm)
 
-(def pegs #{:red :orange :yellow :green :blue :violet})
+(def pegs [:red :orange :yellow :green :blue :violet])
 
 (defn secret-chooser [size]
-  (fn [] (repeatedly size #(rand-nth (vec pegs)))))
+  (fn [] (repeatedly size #(rand-nth pegs))))
 
 ;; Finds number of correct pegs in correct position
 (defn exact-matches [guess actual]

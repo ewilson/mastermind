@@ -30,4 +30,4 @@
     (doall (for [secret secrets] (play-game secret request-comp-guess record-stats)))))
 
 (defn evaluate-solver [size]
-  (println (sort (frequencies (play-all size)))))    
+  (println (time (sort (frequencies (play-all size))))))  

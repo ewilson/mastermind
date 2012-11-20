@@ -11,6 +11,9 @@
   (is (= 3 (exact-matches [:red :red :blue :green] [:red :red :green :green])))
   (is (= 4 (exact-matches [:red :red :blue :green] [:red :red :blue :green]))))
 
+(deftest finds-exact-matches 
+  (is (= 2 (exact-matches [:red :red :blue :blue :green :green] [:green :green :green :green :green :green]))))
+
 (deftest finds-unordered-matches 
   (is (= 0 (unordered-matches [:red :red :blue :green] [:yellow :violet :orange :orange])))
   (is (= 1 (unordered-matches [:red :red :blue :green] [:yellow :blue :violet :yellow])))

@@ -2,10 +2,8 @@
   (:use wilsonericn.mm)
   (:require [clojure.math.combinatorics :as comb]))
 
-(def pegvec (vec pegs))
-
 (defn allcodes [size]
-  (apply comb/cartesian-product (repeat size pegvec)))
+  (apply comb/cartesian-product (repeat size pegs)))
 
 (defn consistent [result]
   (fn [code] (= (:clue result) (evaluate code (:guess result)))))
@@ -15,5 +13,5 @@
 
 (defn request-comp-guess [rounds size]
   (if (empty? rounds)
-    (take size [:red :red :orange :orange :yellow :yellow :green :green :blue :blue :violet :violet])
+    (take size [:violet :violet :blue :blue :green :green :yellow :yellow :orange :orange :red :red])
     (first (consistent-all rounds size))))

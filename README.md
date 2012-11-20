@@ -42,7 +42,7 @@ There are currently three ways of interacting with this game:
 3. You can run the solver against all possible code to evaluate effectiveness and performance.
 
 ### Solver algorithm
-I solve the puzzle in the simplest way that I know: choosing the 'first' code from the list of all of the possible codes that are still possible, based on the previous results. For example: If the first round is the following:
+I solve the puzzle in _almost_ the simplest way that I know: choosing the 'first' code from the list of all of the possible codes that are still possible, based on the previous results. For example: If the first round is the following:
 
     ------------
     RRBB  |O   |
@@ -55,10 +55,9 @@ then all future guesses must be consistent with this, meaning:
 * No guess will contain red in the first or second spot, or blue in the third or fourth spot
 * All guesses will contain a red or a blue
 
+The first guess is fixed, depending only on the number of pegs.
+
 ### Design 
 
 I have chosen to put the assiging of `X` and `O`s to guesses in the category of 'game mechanics' (namespace `wilsonericn.mm`) rather than as an action performed by a player, since it is entirely determanistic. The only disadvantage of this approach is a lack of transparency when a human is setting the code. This seems more than offset by the convenience of seeing the solver in action without having to evaluate and respond to each guess.
 
-### To be implemented
-* Computation of effectiveness and performance metrics
-* Performance is currently unacceptable, particularly as pegs increase. Improvement is planned
