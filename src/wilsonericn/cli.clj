@@ -11,6 +11,9 @@
 (defn convert-input [input]
   (map conversion (str/upper-case (str/replace input #"\W" ""))))
 
+;; prints completed round as follows:
+;; --------------
+;; |RRGB|  |XXO |
 (defn convert-output [round]
   (let [guess (apply str (map reverse-code (:guess round)))
         clue (apply str (map reverse-clue (:clue round)))
@@ -21,8 +24,7 @@
 
 (defn show-board [rounds]
   (doseq [r rounds]
-    (println (convert-output r)))
-  rounds)
+    (println (convert-output r))))
 
 (defn request-code []
   (println "Enter code")

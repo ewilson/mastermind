@@ -22,12 +22,14 @@
 (defn record-stats [rounds]
   (let [num (count rounds)
         code (:guess (last rounds))]
-    (do (println "code: " code " Number of rounds: " num)
-      num)))
+    (println "code: " code " Number of rounds: " num)
+    num))
 
+;; Plays all combinations of pegs for the given size of board
 (defn play-all [size]
   (let [secrets (map (fn [code] (fn [] code)) (allcodes size))]
     (doall (for [secret secrets] (play-game secret request-comp-guess record-stats)))))
 
+;; Outputs processing time and 'histogram' produced by playing every combination of pegs
 (defn evaluate-solver [size]
   (println (time (sort (frequencies (play-all size))))))  
