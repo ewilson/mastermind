@@ -17,7 +17,7 @@
 (defn unordered-matches [guess actual]
     (apply + (vals (merge-with min (peg-counts guess) (peg-counts actual)))))
 
-;; Evaluates a guess agains a code, returning a map with :black and :white counts
+;; Evaluates a guess agains a code, returning a seq with :black and :white counts
 (defn evaluate [guess actual] 
   (let [exact (exact-matches guess actual)
         unordered (unordered-matches guess actual)]
